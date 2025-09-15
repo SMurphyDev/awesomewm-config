@@ -64,16 +64,14 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 local theme_path = string.format("%s/.config/awesome/themes/", os.getenv("HOME"))
 beautiful.init(theme_path .. "mytheme/theme.lua")
 
+-- There are 3 wallpapers defined in a table for multiple monitors in my
+-- theme and we will set them in sequence based based on the screen index.
+-- We do a modulo operation to calculate which wallpaper to use so they
+-- repeat if there are more than 3 screens.
 local function set_wallpaper(s)
-	-- Wallpaper
-	if beautiful.wallpaper then
-		local wallpaper = beautiful.wallpaper
-		-- If wallpaper is a function, call it with the screen
-		if type(wallpaper) == "function" then
-			wallpaper = wallpaper(s)
-		end
-		gears.wallpaper.maximized(wallpaper, s, true)
-	end
+	local wallpapers = beautiful.wallpapers
+	local wallpaper_idx = (s.index % #wallpapers) + 1
+	gears.wallpaper.maximized(wallpapers[s.index], s, true)
 end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
