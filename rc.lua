@@ -70,8 +70,8 @@ beautiful.init(theme_path .. "mytheme/theme.lua")
 -- repeat if there are more than 3 screens.
 local function set_wallpaper(s)
 	local wallpapers = beautiful.wallpapers
-	local wallpaper_idx = (s.index % #wallpapers) + 1
-	gears.wallpaper.maximized(wallpapers[s.index], s, true)
+	local wallpaper_idx = (s.index % #wallpapers)
+	gears.wallpaper.maximized(wallpapers[wallpaper_idx], s, true)
 end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
